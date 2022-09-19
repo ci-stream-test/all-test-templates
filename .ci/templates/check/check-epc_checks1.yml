@@ -1,0 +1,13 @@
+parameters:
+- name: receivers
+  type: array
+  default: [ruotiantang, royalhuang]
+
+gates:
+- name: gate-1
+  rule:     
+  - qualityTestt.pass_rate <= 11.664
+  - qualityTestt.caseCnt_succ <= 11
+  notify-on-fail:
+  - type: wework-message
+    receivers: ${{ parameters.receivers }}

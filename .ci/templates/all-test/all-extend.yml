@@ -1,0 +1,13 @@
+parameters:
+  - name: service
+    type: string
+
+steps:
+- run: | 
+    #!/bin/bash
+    wget https://mirrors.tencent.com/repository/maven/srmp_op/com/tencent/srmp/analysis/1.0-SNAPSHOT/analysis-1.0-SNAPSHOT.jar -O analysis.jar
+    chmod 777 analysis.jar
+    ls -l
+    echo '提交人:' + ${{ ci.actor }}
+    echo 'git地址' + ${{ ci.repo_url }}
+    echo "java -jar analysis.jar ${{ parameters.service }}"

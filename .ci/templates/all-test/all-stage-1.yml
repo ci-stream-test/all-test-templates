@@ -1,0 +1,21 @@
+stages:
+- name: Window-私有
+  label: Deploy
+  jobs:
+    template:
+    - name: all-test/templates/all-job-3.yml
+    all-job-4:
+      if: variables.WINDOW_TRIGGER == true
+      name: all-job-4
+      depend-on: [all-job-3]
+      steps:
+      - run: |
+          echo " all-job-4 [variables, if, winodws-run] 执行完成"
+    all-job-5:
+      if: variables.WINDOW_TRIGGER == false
+      name: all-job-5  
+      depend-on: [all-job-3]  
+      steps:
+      - run: |
+          echo " all-job-5 [set variables] 执行失败"
+          exit 1

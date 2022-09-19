@@ -1,0 +1,37 @@
+parameters:
+- name: content
+  type: string
+  default: 执行成功
+
+stages:
+- name: "stage1"
+  check-in:
+    reviews:
+      flows:
+        - name: variables单替换测试
+          reviewers: 
+          - ${{ ci.actor }} 
+      description: |
+        远程模板库 stage-check
+    gates:
+      - template: check/check-epc_checks1.yml
+        parameters:
+          receivers: [ "${{ ci.actor }}" ] 
+      - template: check/check-epc_checks2.yml     
+    timeout-hours: 10
+  jobs: 
+    all-job-6:
+      env:
+        content: "执行失败"
+      name: all-job-6  
+      steps:
+      - run: |
+          if [ ${content} == 执行成功 ]
+          then 
+            echo " all-job-6 [step.env] ${content} "    
+          else 
+            echo " all-job-6 [step.env] ${content} "
+            exit
+          fi 
+        env:
+          content: ${{ parameters.content }}
