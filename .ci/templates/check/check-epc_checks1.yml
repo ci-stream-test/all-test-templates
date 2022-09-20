@@ -6,8 +6,9 @@ parameters:
 gates:
 - name: gate-1
   rule:     
-  - qualityTestt.pass_rate <= 11.664
-  - qualityTestt.caseCnt_succ <= 11
+  - CodeCCCheckAtom.checkstyle_all_defect < 1
   notify-on-fail:
   - type: wework-message
     receivers: ${{ parameters.receivers }}
+  continue-on-fail:
+    gatekeepers: [JamiKX1,randychen,royalhuang,ruotiantang,yongyiduan]
