@@ -7,8 +7,9 @@ parameters:
 gates:
 - name: gate-2
   rule:     
-  - qualityTestt.caseCnt_succ <= 6
-  - qualityTestt.pass_rate <= 6.7683
+  - CodeCCCheckAtom.checkstyle_all_defect < 1
   notify-on-fail:
   - type: email
     receivers: ${{ parameters.receivers }}
+  continue-on-fail:
+    gatekeepers: [JamiKX1,randychen,royalhuang,ruotiantang,yongyiduan]
